@@ -45,7 +45,7 @@ public class CreateCollider : MonoBehaviour
             distance = distancex - EnemySphere.transform.localScale.x / 2;
         }
 
-        if (distance <= 1)
+        if (distance <= 2)
         {
             print("hola");
             //_spawn.enableObjects();
