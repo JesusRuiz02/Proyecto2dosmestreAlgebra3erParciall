@@ -1,13 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using Random = UnityEngine.Random;
 
 public class Spawn : MonoBehaviour
 {
+    private CreateCollider _createCollider;
     public int numberToSpawn;
     public List<GameObject> spawnPool;
     public List<Material> a;
+    public List<GameObject> obstaculos = new List<GameObject>();
+    public List<GameObject> obstaculos2=new List<GameObject>();
     public GameObject quad;
     public GameObject planet;
     public int random_index;
@@ -22,10 +28,32 @@ public class Spawn : MonoBehaviour
     int[] num = {1,2,3,4,5};
     public int n = 0;
     public int[] num2 = {0,0,0,0,0,0};
+    
     void Start()
     {
+        var shuffled = obstaculos.OrderBy(x => System.Guid.NewGuid()).ToList();
+        for (int i = 0; i < 5; i++)
+        {
+//            print(shuffled[i]);
+            obstaculos2.Add(shuffled[i]);
+        }
         SpawnObjects();
         planet.gameObject.SetActive(false);
+       /* foreach (GameObject p in obstaculos2)
+        { 
+            print(p); 
+            print(p.GetComponent<MeshRenderer>().enabled);
+            p.GetComponent<MeshRenderer>().enabled=true;
+        }*/
+        
+            
+          
+        
+    }
+
+    void Update()
+    {
+       
     }
 
     private void SpawnObjects()
@@ -94,7 +122,9 @@ public class Spawn : MonoBehaviour
                 toSpawn.GetComponent<Renderer>().material = gray;
             }
 
-
+           Instantiate(obstaculos2[i],pos,transform.rotation);
+        // obstaculos2[i].SetActive(false);
+         obstaculos2[i].GetComponent<MeshRenderer>().enabled=false;
 
 
 
@@ -109,9 +139,10 @@ public class Spawn : MonoBehaviour
         }
     }
 
-    
-    
+   
 
-  
+
+
+
 
 }
